@@ -12,14 +12,19 @@ def name_of_training ():
     return trainid_trainingname
 
 
-def predict_training(completed_training, trainid, segmentation, goal, healthlimit, tire, time, quant, type, bodypart, equipment, level, top_k = 3):
-    X = [[trainid, segmentation, goal, healthlimit, tire, time, quant, type, bodypart, equipment, level]]
+def predict_training(completed_training, segmentation, goal, healthlimit, tire, time, quant, type, bodypart, equipment, level, top_k = 3):
+    if completed_training:
+        trainid = completed_training[-1]
+        X = [[trainid, segmentation, goal, healthlimit, tire, time, quant, type, bodypart, equipment, level]]
+        prediction_rating = ridge_model.predict(X)
+    else:
+        prediction_rating = 5
     trainingnames = name_of_training()
-    prediction_rating = ridge_model.predict(X)
     file_path = 'mydataset.csv'
     df = pd.read_csv(file_path)
     training = []
     trainingnametop = []
+    print(type, bodypart, equipment, level)
     for i in range (len(df)):
         if df['Type'][i] == type and df['BodyPart'][i]==bodypart and df['Level'][i]==level and df['Equipment'][i]==equipment:
             training.append([df['TrainID'][i], abs(prediction_rating - df['Rating'][i])])

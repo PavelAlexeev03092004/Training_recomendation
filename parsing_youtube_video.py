@@ -19,8 +19,8 @@ from selenium.webdriver.common.by import By
 
 def get_1st_video(names:List[str]):
     options = webdriver.FirefoxOptions()
-    # options.add_argument('--headless')
-    browser = webdriver.Firefox(options=options)
+    options.add_argument('--headless')
+    browser = webdriver.Firefox()
     links = []
     for i in range (len(names)):
         name = names[i]
@@ -36,5 +36,5 @@ def get_1st_video(names:List[str]):
     browser.quit()
     return links
 
-get_1st_video(['жим лежа', 'подъем штанги на бицепс', 'приседания'])
+# get_1st_video(['жим лежа', 'подъем штанги на бицепс', 'приседания'])
 
