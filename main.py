@@ -75,7 +75,7 @@ def result(completed_training, history):
         raise Exception("Указан неверный уровень физической подготовки")
     else:
         level = level.index(history[9])
-    nametraining = predict_training(completed_training, segmentation, goal, healthlimit, tire, time, quant, type, bodypart, equipment, level, top_k=1)
+    nametraining = predict_training(completed_training, segmentation, goal, healthlimit, tire, time, quant, type, bodypart, equipment, level, top_k=3)
     names = [nt[1] for nt in nametraining]
     videotraining = get_1st_video(names)
     return ([(name, video) for name, video in zip(names, videotraining)])

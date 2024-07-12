@@ -12,7 +12,6 @@
 # get_1st_video("benchpress")
 import time
 from typing import List
-
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
@@ -25,7 +24,7 @@ def get_1st_video(names:List[str]):
     for i in range (len(names)):
         name = names[i]
         browser.get('https://www.youtube.com/results?search_query=' + name.replace(' ', '+'))
-        time.sleep(10)
+        time.sleep(5)
         first_video = browser.find_elements(By.ID, "thumbnail")
         print (first_video)
         for i in range (len(first_video)):
@@ -35,6 +34,7 @@ def get_1st_video(names:List[str]):
                 break
     browser.quit()
     return links
+# print(get_1st_video(["жим лежа", "приседания", "подъем штанги на бицепс"]))
 
-# get_1st_video(['жим лежа', 'подъем штанги на бицепс', 'приседания'])
+
 
